@@ -14,7 +14,14 @@ public class Recursive extends Iterative {
     private BigInteger[][] times;
     private BigInteger promTime = BigInteger.ZERO;
 
-    public void recursive(BigInteger n) throws IOException {
+    /**
+     * Función main que llama a la función recursiva optimizada del coeficiente
+     * binomial
+     *
+     * @param n
+     * @throws IOException
+     */
+    public void newRecursive(BigInteger n) throws IOException {
         times = new BigInteger[n.intValue() + 1][5];
         System.out.println("********************Recursivo********************");
         for (int i = 0; i <= n.intValue(); i++) {
@@ -32,8 +39,33 @@ public class Recursive extends Iterative {
     }
 
     /**
-     * Coeficiente binomial por definición, muy lento cuando se da un valor mayor a 35
-     * para un valor de 50 demora más de 1h y media.
+     * Función main que llama a la función no optima recursiva del coeficiente
+     * binomial
+     *
+     * @param n
+     * @throws IOException
+     */
+    public void oldRecursive(BigInteger n) throws IOException {
+        times = new BigInteger[n.intValue() + 1][5];
+        System.out.println("********************Recursivo********************");
+        for (int i = 0; i <= n.intValue(); i++) {
+            times[i][0] = n;
+            times[i][1] = BigInteger.valueOf(i);
+            Long ts = System.nanoTime();
+            times[i][2] = recursiveBinom(n, BigInteger.valueOf(i));
+            times[i][3] = BigInteger.valueOf(System.nanoTime() - ts);
+            promTime = promTime.add(times[i][3]);
+        }
+        showInfo();
+        System.out.println("Promedio de los tiempos de ejecución(Recursivo): " + (promTime.divide(n)) + " nanosegundos");
+        new ArchiveManager().createFile(times);
+        System.out.println("*************************************************");
+    }
+
+    /**
+     * Coeficiente binomial por definición, muy lento cuando se da un valor
+     * mayor a 35 para un valor de 50 demora más de 1h y media.
+     *
      * @deprecated
      * @param n
      * @param k
@@ -49,6 +81,7 @@ public class Recursive extends Iterative {
 
     /**
      * Coeficiente binomial recursivo mucho más optimo
+     *
      * @param n
      * @param k
      * @return combinatoria de n en k

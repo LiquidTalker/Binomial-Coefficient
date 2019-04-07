@@ -14,7 +14,14 @@ public class Iterative {
     private BigInteger[][] times;
     private BigInteger promTime = BigInteger.ZERO;
 
-    public void iterative(BigInteger n) throws IOException {
+    /**
+     * Función main que llama a la función optimizada iterativa del coeficiente
+     * binomial
+     *
+     * @param n
+     * @throws IOException
+     */
+    public void newIterative(BigInteger n) throws IOException {
         times = new BigInteger[n.intValue() + 1][5];
         System.out.println("********************Iterativo********************");
         for (int i = 0; i <= n.intValue(); i++) {
@@ -22,7 +29,30 @@ public class Iterative {
             times[i][0] = n;
             times[i][1] = BigInteger.valueOf(i);
             times[i][2] = betterIterativeBinom(n, BigInteger.valueOf(i));
-            //times[i][2] = factorial(n).divide(factorial(BigInteger.valueOf(i)).multiply(factorial(n.subtract(BigInteger.valueOf(i)))));
+            times[i][3] = BigInteger.valueOf(System.nanoTime() - ts);
+            promTime = promTime.add(times[i][3]);
+        }
+        showInfo(times);
+        System.out.println("Promedio de los tiempos de ejecución(Iterativo): " + (promTime.divide(n) + " nanosegundos"));
+        new ArchiveManager().createFile(times);
+        System.out.println("*************************************************");
+    }
+
+    /**
+     * Función main que llama a la función no optima del coeficiente binomial
+     * iterativo
+     *
+     * @param n
+     * @throws IOException
+     */
+    public void oldIterative(BigInteger n) throws IOException {
+        times = new BigInteger[n.intValue() + 1][5];
+        System.out.println("********************Iterativo********************");
+        for (int i = 0; i <= n.intValue(); i++) {
+            Long ts = System.nanoTime();
+            times[i][0] = n;
+            times[i][1] = BigInteger.valueOf(i);
+            times[i][2] = factorial(n).divide(factorial(BigInteger.valueOf(i)).multiply(factorial(n.subtract(BigInteger.valueOf(i)))));
             times[i][3] = BigInteger.valueOf(System.nanoTime() - ts);
             promTime = promTime.add(times[i][3]);
         }

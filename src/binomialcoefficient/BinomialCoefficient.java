@@ -15,8 +15,18 @@ public class BinomialCoefficient {
     public static void main(String[] args) throws IOException {
         System.out.print("Digite n: ");
         BigInteger n = new Scanner(System.in).nextBigInteger();
-        new Iterative().iterative(n);
-        new Recursive().recursive(n);
+        /*for (int i = 50; i <= n.intValue(); i += 50) {
+            new Iterative().newIterative(BigInteger.valueOf(i));
+            new Recursive().newRecursive(BigInteger.valueOf(i));
+        }
+        for (int i = 0; i <= n.intValue(); i++) {
+            new Iterative().oldIterative(BigInteger.valueOf(i));
+            new Recursive().oldRecursive(BigInteger.valueOf(i));
+        }*/
+        new Iterative().newIterative(n);
+        new Recursive().newRecursive(n);
+        //new Iterative().oldIterative(n);
+        //new Recursive().oldRecursive(n);
     }
 
 }
