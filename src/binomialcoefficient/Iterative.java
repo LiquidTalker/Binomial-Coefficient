@@ -2,6 +2,8 @@ package binomialcoefficient;
 
 import java.io.IOException;
 import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  *
@@ -11,7 +13,8 @@ import java.math.BigInteger;
  */
 public class Iterative {
 
-    private BigInteger[][] times;
+    private BigInteger[][] results;
+    private ArrayList<BigInteger> times = new ArrayList<>();
     private BigInteger promTime = BigInteger.ZERO;
 
     /**
@@ -22,19 +25,40 @@ public class Iterative {
      * @throws IOException
      */
     public void newIterative(BigInteger n) throws IOException {
-        times = new BigInteger[n.intValue() + 1][5];
+        results = new BigInteger[n.intValue() + 1][6];
         System.out.println("********************Iterativo********************");
         for (int i = 0; i <= n.intValue(); i++) {
             Long ts = System.nanoTime();
-            times[i][0] = n;
-            times[i][1] = BigInteger.valueOf(i);
-            times[i][2] = betterIterativeBinom(n, BigInteger.valueOf(i));
-            times[i][3] = BigInteger.valueOf(System.nanoTime() - ts);
-            promTime = promTime.add(times[i][3]);
+            results[i][0] = n;
+            results[i][1] = BigInteger.valueOf(i);
+            results[i][2] = betterIterativeBinom(n, BigInteger.valueOf(i));
+            results[i][3] = BigInteger.valueOf(System.nanoTime() - ts);
+            times.add(results[i][3]);
+            promTime = promTime.add(results[i][3]);
         }
-        showInfo(times);
-        System.out.println("Promedio de los tiempos de ejecución(Iterativo): " + (promTime.divide(n) + " nanosegundos"));
-        new ArchiveManager().createFile(times);
+        promTime = promTime.divide(n);
+        Helper.standardDeviation(times, promTime);
+        for (int i = 0; i <= n.intValue(); i++) {
+            results[i][4] = promTime;
+            results[i][5] = Helper.deviation;
+        }
+        Helper.showInfo(results);
+        System.out.println("Promedio de los tiempos de ejecución(Iterativo): " + promTime + " nanosegundos");
+        System.out.println("La desviación estandar para n = " + n + ": " + Helper.deviation);
+        new ArchiveManager().createFile(results);
+        System.out.println("*************************************************");
+    }
+
+    public void specificIterative() throws IOException {
+        System.out.println("********************Iterativo********************");
+        System.out.println("Digite el n: ");
+        BigInteger n = new Scanner(System.in).nextBigInteger();
+        System.out.println("Digite el k: ");
+        BigInteger k = new Scanner(System.in).nextBigInteger();
+        Long ts = System.nanoTime();
+        BigInteger result = betterIterativeBinom(n, k);
+        Helper.showSpecificOne(n, k, result, (System.nanoTime() - ts));
+        new ArchiveManager().saveSpecificOne(n, k, result, (System.nanoTime() - ts));
         System.out.println("*************************************************");
     }
 
@@ -46,19 +70,27 @@ public class Iterative {
      * @throws IOException
      */
     public void oldIterative(BigInteger n) throws IOException {
-        times = new BigInteger[n.intValue() + 1][5];
+        results = new BigInteger[n.intValue() + 1][6];
         System.out.println("********************Iterativo********************");
         for (int i = 0; i <= n.intValue(); i++) {
             Long ts = System.nanoTime();
-            times[i][0] = n;
-            times[i][1] = BigInteger.valueOf(i);
-            times[i][2] = factorial(n).divide(factorial(BigInteger.valueOf(i)).multiply(factorial(n.subtract(BigInteger.valueOf(i)))));
-            times[i][3] = BigInteger.valueOf(System.nanoTime() - ts);
-            promTime = promTime.add(times[i][3]);
+            results[i][0] = n;
+            results[i][1] = BigInteger.valueOf(i);
+            results[i][2] = factorial(n).divide(factorial(BigInteger.valueOf(i)).multiply(factorial(n.subtract(BigInteger.valueOf(i)))));
+            results[i][3] = BigInteger.valueOf(System.nanoTime() - ts);
+            times.add(results[i][3]);
+            promTime = promTime.add(results[i][3]);
         }
-        showInfo(times);
-        System.out.println("Promedio de los tiempos de ejecución(Iterativo): " + (promTime.divide(n) + " nanosegundos"));
-        new ArchiveManager().createFile(times);
+        promTime = promTime.divide(n);
+        Helper.standardDeviation(times, promTime);
+        for (int i = 0; i <= n.intValue(); i++) {
+            results[i][4] = promTime;
+            results[i][5] = Helper.deviation;
+        }
+        Helper.showInfo(results);
+        System.out.println("Promedio de los tiempos de ejecución(Iterativo): " + promTime + " nanosegundos");
+        System.out.println("La desviación estandar para n = " + n + ": " + Helper.deviation);
+        new ArchiveManager().createFile(results);
         System.out.println("*************************************************");
     }
 
@@ -95,21 +127,6 @@ public class Iterative {
             binom = binom.multiply(n.subtract(BigInteger.valueOf(i)).add(BigInteger.ONE)).divide(BigInteger.valueOf(i));
         }
         return binom;
-    }
-
-    /**
-     * Muestra la información obtenida de forma recursiva e iterativa
-     *
-     * @param times, matriz con los resultados de las combinatorias y sus
-     * tiempos
-     */
-    public void showInfo(BigInteger[][] times) {
-        for (int i = 0; i < times.length; i++) {
-            for (int j = 0; j < 4; j++) {
-                System.out.print("[" + times[i][j] + "]");
-            }
-            System.out.println(" ");
-        }
     }
 
 }

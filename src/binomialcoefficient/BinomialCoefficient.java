@@ -23,8 +23,10 @@ public class BinomialCoefficient {
             new Iterative().oldIterative(BigInteger.valueOf(i));
             new Recursive().oldRecursive(BigInteger.valueOf(i));
         }*/
-        new Iterative().newIterative(n);
-        new Recursive().newRecursive(n);
+        //new Iterative().newIterative(n);
+        //new Recursive().newRecursive(n);
+        new Iterative().specificIterative();
+        new Recursive().SpecificRecursive();
         //new Iterative().oldIterative(n);
         //new Recursive().oldRecursive(n);
     }

@@ -18,7 +18,7 @@ public class ArchiveManager {
     public void createFile(BigInteger[][] times) throws IOException {
         System.out.print("Digite el nombre del archivo: ");
         String name = new Scanner(System.in).next();
-        file = new File("./" + name+".txt");
+        file = new File("./" + name + ".txt");
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
             for (int i = 0; i < times.length; i++) {
                 for (int j = 0; j < 4; j++) {
@@ -26,6 +26,15 @@ public class ArchiveManager {
                 }
                 bw.newLine();
             }
+        }
+    }
+
+    public void saveSpecificOne(BigInteger n, BigInteger k, BigInteger result, Long ts) throws IOException {
+        System.out.println("Digite el nombre del archivo: ");
+        String name = new Scanner(System.in).next();
+        file = new File("./" + name + ".txt");
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
+            bw.write(n.toString() + "," + k.toString() + "," + result.toString() + "," + ts.toString() + ",");
         }
     }
 }
