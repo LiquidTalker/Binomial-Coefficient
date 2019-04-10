@@ -27,7 +27,7 @@ public class Iterative {
     public void newIterative(BigInteger n) throws IOException {
         results = new BigInteger[n.intValue() + 1][6];
         System.out.println("********************Iterativo********************");
-        for (int i = 0; i <= n.intValue(); i++) {
+        for (int i = 50; i <= n.intValue(); i += 50) {
             Long ts = System.nanoTime();
             results[i][0] = n;
             results[i][1] = BigInteger.valueOf(i);
@@ -72,7 +72,7 @@ public class Iterative {
     public void oldIterative(BigInteger n) throws IOException {
         results = new BigInteger[n.intValue() + 1][6];
         System.out.println("********************Iterativo********************");
-        for (int i = 0; i <= n.intValue(); i++) {
+        for (int i = 50; i <= n.intValue(); i += 50) {
             Long ts = System.nanoTime();
             results[i][0] = n;
             results[i][1] = BigInteger.valueOf(i);

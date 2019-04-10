@@ -18,15 +18,15 @@ public class BinomialCoefficient {
         /*for (int i = 50; i <= n.intValue(); i += 50) {
             new Iterative().newIterative(BigInteger.valueOf(i));
             new Recursive().newRecursive(BigInteger.valueOf(i));
-        }
-        for (int i = 0; i <= n.intValue(); i++) {
+        }*/
+        /*for (int i = 0; i <= n.intValue(); i++) {
             new Iterative().oldIterative(BigInteger.valueOf(i));
             new Recursive().oldRecursive(BigInteger.valueOf(i));
         }*/
         //new Iterative().newIterative(n);
         //new Recursive().newRecursive(n);
-        new Iterative().specificIterative();
-        new Recursive().SpecificRecursive();
+        //new Iterative().specificIterative();
+        //new Recursive().SpecificRecursive();
         //new Iterative().oldIterative(n);
         //new Recursive().oldRecursive(n);
     }

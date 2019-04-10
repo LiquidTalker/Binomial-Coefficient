@@ -18,7 +18,7 @@ public class Helper {
      * tiempos
      */
     public static void showInfo(BigInteger[][] results) {
-        for (int i = 0; i < results.length; i++) {
+        for (int i = 50; i < results.length; i += 50) {
             for (int j = 0; j < 6; j++) {
                 System.out.print("[" + results[i][j] + "]");
             }
@@ -39,7 +39,11 @@ public class Helper {
             temp = time.subtract(promTime);
             sum = sum.add(temp.pow(2));
         }
-        Helper.deviation = sum.divide(BigInteger.valueOf(times.size() - 1));
+        if (times.size() - 1 == 0) {
+            Helper.deviation = sum.divide(BigInteger.valueOf(times.size()));
+        } else {
+            Helper.deviation = sum.divide(BigInteger.valueOf(times.size() - 1));
+        }
     }
 
     public static void showSpecificOne(BigInteger n, BigInteger k, BigInteger result, Long time) {

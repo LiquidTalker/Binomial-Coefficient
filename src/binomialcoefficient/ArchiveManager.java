@@ -18,11 +18,11 @@ public class ArchiveManager {
     public void createFile(BigInteger[][] times) throws IOException {
         System.out.print("Digite el nombre del archivo: ");
         String name = new Scanner(System.in).next();
-        file = new File("./" + name + ".txt");
+        file = new File("./" + name + ".csv");
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
-            for (int i = 0; i < times.length; i++) {
-                for (int j = 0; j < 4; j++) {
-                    bw.write(times[i][j] + ",");
+            for (int i = 50; i < times.length; i += 50) {
+                for (int j = 0; j < 6; j++) {
+                    bw.write(times[i][j] + ";");
                 }
                 bw.newLine();
             }
