@@ -27,7 +27,7 @@ public class Recursive {
     public void newRecursive(BigInteger n) throws IOException {
         results = new BigInteger[n.intValue() + 1][6];
         System.out.println("********************Recursivo********************");
-        for (int i = 50; i <= n.intValue(); i += 50) {
+        for (int i = 0; i <= n.intValue(); i++) {
             results[i][0] = n;
             results[i][1] = BigInteger.valueOf(i);
             Long ts = System.nanoTime();
@@ -72,7 +72,7 @@ public class Recursive {
     public void oldRecursive(BigInteger n) throws IOException {
         results = new BigInteger[n.intValue() + 1][6];
         System.out.println("********************Recursivo********************");
-        for (int i = 50; i <= n.intValue(); i += 50) {
+        for (int i = 0; i <= n.intValue(); i++) {
             results[i][0] = n;
             results[i][1] = BigInteger.valueOf(i);
             Long ts = System.nanoTime();

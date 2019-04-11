@@ -18,7 +18,7 @@ public class Helper {
      * tiempos
      */
     public static void showInfo(BigInteger[][] results) {
-        for (int i = 50; i < results.length; i += 50) {
+        for (int i = 0; i < results.length; i++) {
             for (int j = 0; j < 6; j++) {
                 System.out.print("[" + results[i][j] + "]");
             }
